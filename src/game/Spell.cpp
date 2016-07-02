@@ -2553,6 +2553,8 @@ void Spell::prepare(SpellCastTargets const* targets, Aura* triggeredByAura)
         SendSpellStart();
 
         TriggerGlobalCooldown();
+		if (m_timer == 0 && !IsNextMeleeSwingSpell() && !IsAutoRepeat() && !IsChanneledSpell(m_spellInfo))
+			cast();
     }
     // execute triggered without cast time explicitly in call point
     else if (m_timer == 0)
