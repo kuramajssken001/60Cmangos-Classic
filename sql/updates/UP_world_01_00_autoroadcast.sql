@@ -1,0 +1,1 @@
+INSERT INTO `mangos_string` (`entry`, `content_default`) VALUES ('12001', '[系统公告]：%s');
