@@ -75,7 +75,8 @@ enum WorldTimers
     WUPDATE_EVENTS      = 4,
     WUPDATE_DELETECHARS = 5,
     WUPDATE_AHBOT       = 6,
-    WUPDATE_COUNT       = 7
+    WUPDATE_COUNT       = 7,
+	WUPDATE_AUTOBROADCAST = 8
 };
 
 /// Configuration elements
@@ -426,6 +427,7 @@ class World
 
         /// Set the active session server limit (or security level limitation)
         void SetPlayerLimit(int32 limit, bool needUpdate = false);
+		void SendBroadcast();
 
         // player Queue
         typedef std::list<WorldSession*> Queue;
