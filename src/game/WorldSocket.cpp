@@ -634,6 +634,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     std::string account;
     Sha1Hash sha1;
     BigNumber v, s, g, N, K;
+	uint32 jf;
     WorldPacket packet, SendAddonPacked;
 
     // Read the content of the packet
@@ -677,6 +678,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
                              "s, "                       // 6
                              "mutetime, "                // 7
                              "locale "                   // 8
+							 "jf "                       //9
                              "FROM account "
                              "WHERE username = '%s'",
                              safe_account.c_str());
@@ -738,6 +740,8 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
     locale = LocaleConstant(fields[8].GetUInt8());
     if (locale >= MAX_LOCALE)
         locale = LOCALE_enUS;
+
+	jf = fields[9].GetUInt32();
 
     delete result;
 
