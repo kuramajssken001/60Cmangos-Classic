@@ -893,11 +893,13 @@ void World::SetInitialWorldSettings()
     uint32 server_type = IsFFAPvPRealm() ? uint32(REALM_TYPE_PVP) : getConfig(CONFIG_UINT32_GAME_TYPE);
     uint32 realm_zone = getConfig(CONFIG_UINT32_REALM_ZONE);
     LoginDatabase.PExecute("UPDATE realmlist SET icon = %u, timezone = %u WHERE id = '%u'", server_type, realm_zone, realmID);
+	static uint32 abtimer = 0;
+	abtimer = sConfig.GetIntDefault("AutoBroadcast.Timer", 60000);
 
     ///- Remove the bones (they should not exist in DB though) and old corpses after a restart
     CharacterDatabase.PExecute("DELETE FROM corpse WHERE corpse_type = '0' OR time < (UNIX_TIMESTAMP()-'%u')", 3 * DAY);
-	static uint32 abtimer = 0;
-	m_timers[WUPDATE_DELETECHARS].SetInterval(DAY * IN_MILLISECONDS); // check for chars to delete every dayabtimer = sConfig.GetIntDefault("AutoBroadcast.Timer", 60000);
+	m_timers[WUPDATE_DELETECHARS].SetInterval(DAY * IN_MILLISECONDS); // check for chars to delete every day 
+	m_timers[WUPDATE_AUTOBROADCAST].SetInterval(abtimer);
 
     ///- Load the DBC files
     sLog.outString("Initialize data stores...");
