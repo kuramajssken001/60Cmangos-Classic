@@ -2554,7 +2554,6 @@ void Spell::prepare(SpellCastTargets const* targets, Aura* triggeredByAura)
     }
 
     // add non-triggered (with cast time and without)
-    else if (!m_IsTriggeredSpell)
 	if (!m_IsTriggeredSpell)
     {
         // add to cast type slot
