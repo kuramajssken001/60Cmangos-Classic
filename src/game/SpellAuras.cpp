@@ -2008,6 +2008,14 @@ void Aura::HandleModPossess(bool apply, bool Real)
 
     if (apply)
     {
+		if (caster->GetTypeId() == TYPEID_PLAYER)
+		{
+			 //remove any existing charm just in case
+			caster->Uncharm();
+			
+			//pets should be removed when possesing a target if somehow check was bypassed
+			((Player*)caster)->UnsummonPetIfAny();
+		}
         target->addUnitState(UNIT_STAT_CONTROLLED);
 
         target->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PLAYER_CONTROLLED);
@@ -2110,6 +2118,14 @@ void Aura::HandleModPossessPet(bool apply, bool Real)
 
     if (apply)
     {
+		if (caster->GetTypeId() == TYPEID_PLAYER)
+		{
+	            //remove any existing charm just in case
+				caster->Uncharm();
+			
+	            //pets should be removed when possesing a target if somehow check was bypassed
+				((Player*)caster)->UnsummonPetIfAny();
+		}
         pet->addUnitState(UNIT_STAT_CONTROLLED);
 
         // target should became visible at SetView call(if not visible before):
@@ -2175,6 +2191,14 @@ void Aura::HandleModCharm(bool apply, bool Real)
 
     if (apply)
     {
+		if (caster->GetTypeId() == TYPEID_PLAYER)
+		{
+			//remove any existing charm just in case
+			caster->Uncharm();
+			
+			//pets should be removed when possesing a target if somehow check was bypassed
+			((Player*)caster)->UnsummonPetIfAny();
+		}
         // is it really need after spell check checks?
         target->RemoveSpellsCausingAura(SPELL_AURA_MOD_CHARM, GetHolder());
         target->RemoveSpellsCausingAura(SPELL_AURA_MOD_POSSESS, GetHolder());
