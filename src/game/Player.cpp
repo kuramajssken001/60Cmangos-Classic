@@ -562,6 +562,7 @@ void Player::CleanupsBeforeDelete()
     {
         TradeCancel(false);
         DuelComplete(DUEL_INTERRUPTED);
+		DuelComplete(DUEL_FLED);
     }
 
     // notify zone scripts for player logout
