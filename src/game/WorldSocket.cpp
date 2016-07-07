@@ -677,7 +677,7 @@ int WorldSocket::HandleAuthSession(WorldPacket& recvPacket)
                              "v, "                       // 5
                              "s, "                       // 6
                              "mutetime, "                // 7
-                             "locale "                   // 8
+                             "locale, "                   // 8
 							 "jf "                       //9
                              "FROM account "
                              "WHERE username = '%s'",
